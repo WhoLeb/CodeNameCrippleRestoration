@@ -2,6 +2,7 @@
 
 
 #include "C_MainChar.h"
+#include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -53,6 +54,7 @@ AC_MainChar::AC_MainChar()
 		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Yellow, "Player controller created");
 	}
 
+	AttacAnim = CreateDefaultSubobject<UAnimMontage>("AttacAnim");
 }
 
 // Called when the game starts or when spawned
@@ -80,6 +82,8 @@ void AC_MainChar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("MoveX", this, &AC_MainChar::MoveX);
 
 	PlayerInputComponent->BindAction("Dash", IE_Pressed, this, &AC_MainChar::Dash);
+
+	PlayerInputComponent->BindAction("Attac", IE_Pressed, this, &AC_MainChar::PlayMyAttacAnim);
 	
 }
 
@@ -131,4 +135,8 @@ void AC_MainChar::RotatePlayerToMouse(){
 
 	GetMesh()->SetWorldRotation(FRotator(0, CurrentMeshRotation.Yaw - 90.f, 0));
 
+}
+
+void AC_MainChar::PlayMyAttacAnim(){
+	PlayAnimMontage(AttacAnim);
 }

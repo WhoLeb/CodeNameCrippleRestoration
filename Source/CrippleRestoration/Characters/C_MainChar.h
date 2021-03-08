@@ -12,6 +12,7 @@ class UCameraComponent;
 class USkeletalMeshComponent;
 class USpringArmComponent;
 class UArrowComponent;
+class UAnimMontage;
 
 UCLASS()
 class CRIPPLERESTORATION_API AC_MainChar : public ACharacter
@@ -78,5 +79,10 @@ private:
 	FRotator CurrentMeshRotation;
 
 	void RotatePlayerToMouse();
+
+	void PlayMyAttacAnim();
+
+	UPROPERTY(EditAnywhere)
+		UAnimMontage* AttacAnim;
 
 };
